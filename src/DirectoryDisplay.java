@@ -36,7 +36,6 @@ public class DirectoryDisplay {
         // Изменили заголовок колонки с "Тип" на "Расширение"
         System.out.printf("%-30s %-15s %-20s%n", "Имя файла/папки", "Расширение/тип", "Размер");
         System.out.println("----------------------------------------------------------------");
-
         try {
             Files.list(path).forEach(file -> {
                 try {
