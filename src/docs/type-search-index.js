@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"DirectoryDisplay"},{"p":"<Unnamed>","l":"FileCopier"},{"p":"<Unnamed>","l":"FileManager"},{"p":"<Unnamed>","l":"FileSizeFormatter"}];updateSearchResults();
+typeSearchIndex = [{"l":"All Classes","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"DirectoryDisplay"},{"p":"<Unnamed>","l":"DirectoryManager"},{"p":"<Unnamed>","l":"FileCopier"},{"p":"<Unnamed>","l":"FileManager"},{"p":"<Unnamed>","l":"FileSizeFormatter"}];updateSearchResults();

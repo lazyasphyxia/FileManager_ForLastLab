@@ -1,3 +1,4 @@
+// FileManager.java
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,7 @@ public class FileManager {
 
     private final DirectoryDisplay directoryDisplay;
     private final FileCopier fileCopier;
+    private final DirectoryManager directoryManager; // Добавляем новый компонент
     private final Scanner scanner;
 
     /**
@@ -18,6 +20,7 @@ public class FileManager {
     public FileManager() {
         this.directoryDisplay = new DirectoryDisplay();
         this.fileCopier = new FileCopier();
+        this.directoryManager = new DirectoryManager(); // Инициализируем
         this.scanner = new Scanner(System.in);
     }
 
@@ -35,14 +38,18 @@ public class FileManager {
 
                 if ("exit".equalsIgnoreCase(command)) {
                     break;
-                }
-
-                if (command.startsWith("copy ")) {
+                } else if ("help".equalsIgnoreCase(command)) { // Обработка команды help
+                    showHelp();
+                } else if (command.startsWith("copy ")) {
                     fileCopier.handleCopyCommand(command, currentDirectory, scanner);
                 } else if (command.startsWith("cd ")) {
                     currentDirectory = handleChangeDirectoryCommand(command, currentDirectory);
+                } else if (command.startsWith("mkdir ")) { // Обработка команды mkdir
+                    directoryManager.handleMkdirCommand(command, currentDirectory);
+                } else if (command.startsWith("rm ")) { // Обработка команды rm
+                    directoryManager.handleRmCommand(command, currentDirectory);
                 } else {
-                    System.out.println("Неизвестная команда. Доступны команды: 'copy <имя_файла> <целевая_директория>', 'cd <путь>', 'exit'");
+                    System.out.println("Неизвестная команда. Введите 'help' для просмотра доступных команд.");
                 }
             } catch (Exception e) {
                 System.err.println("Ошибка выполнения команды: " + e.getMessage());
@@ -54,12 +61,27 @@ public class FileManager {
     }
 
     /**
+     * Выводит справку по доступным командам.
+     */
+    private void showHelp() {
+        System.out.println("\n--- Доступные команды ---");
+        System.out.println("help              - Показать это сообщение.");
+        System.out.println("copy <src> <dst>  - Скопировать файл из <src> в <dst>.");
+        System.out.println("cd <path>         - Перейти в директорию <path>.");
+        System.out.println("mkdir <name>      - Создать директорию <name> в текущей директории.");
+        System.out.println("rm <name>         - Удалить файл или пустую директорию <name> из текущей директории.");
+        System.out.println("exit              - Выйти из файлового менеджера.");
+        System.out.println("--------------------------\n");
+    }
+
+
+    /**
      * Получает команду от пользователя из стандартного ввода.
      *
      * @return введённая пользователем команда, обрезанная от лишних пробелов
      */
     private String getCommand() {
-        System.out.print("\nВведите команду (copy, cd или exit): ");
+        System.out.print("\nВведите команду (help, copy, cd, mkdir, rm или exit): "); // Обновляем подсказку
         return scanner.nextLine().trim();
     }
 
