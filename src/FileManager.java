@@ -42,7 +42,7 @@ public class FileManager {
                     showHelp();
                 } else if (command.startsWith("copy ")) {
                     fileCopier.handleCopyCommand(command, currentDirectory, scanner);
-                } else if (command.startsWith("cd ")) {
+                } else if (command.startsWith("ch ")) {
                     currentDirectory = handleChangeDirectoryCommand(command, currentDirectory);
                 } else if (command.startsWith("mkdir ")) { // Обработка команды mkdir
                     directoryManager.handleMkdirCommand(command, currentDirectory);
@@ -67,7 +67,7 @@ public class FileManager {
         System.out.println("\n--- Доступные команды ---");
         System.out.println("help              - Показать это сообщение.");
         System.out.println("copy <src> <dst>  - Скопировать файл из <src> в <dst>.");
-        System.out.println("cd <path>         - Перейти в директорию <path>.");
+        System.out.println("ch <path>         - Перейти в директорию <path>.");
         System.out.println("mkdir <name>      - Создать директорию <name> в текущей директории.");
         System.out.println("rm <name>         - Удалить файл или пустую директорию <name> из текущей директории.");
         System.out.println("exit              - Выйти из файлового менеджера.");
@@ -81,14 +81,14 @@ public class FileManager {
      * @return введённая пользователем команда, обрезанная от лишних пробелов
      */
     private String getCommand() {
-        System.out.print("\nВведите команду (help, copy, cd, mkdir, rm или exit): "); // Обновляем подсказку
+        System.out.print("\nВведите команду (help, copy, ch, mkdir, rm или exit): "); // Обновляем подсказку
         return scanner.nextLine().trim();
     }
 
     /**
      * Обрабатывает команду смены директории.
      *
-     * @param command          строка команды, начинающаяся с 'cd'
+     * @param command          строка команды, начинающаяся с 'ch'
      * @param currentDirectory текущая директория, из которой производится переход
      * @return новая директория, если переход успешен, иначе — прежняя
      */
